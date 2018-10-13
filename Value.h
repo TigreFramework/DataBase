@@ -6,12 +6,14 @@
 #define INTEGRATION_VALUE_H
 
 #include <string>
+#include <nlohmann/json/single_include/nlohmann/json.hpp>
 
 using namespace std;
 
 class Value {
 
     public:
+        Value() = default;
         Value(string rhs);
         Value(const char rhs[]);
         Value(int rhs);
@@ -23,15 +25,20 @@ class Value {
         Value& operator=(const double& rhs);
         Value& operator=(const float& rhs);
 
-        bool isFloat();
-        bool isDouble();
-        bool isInteger();
-        bool isString();
+        //explicit operator std::string() const;
+        operator int() const;
+        operator double() const;
+        operator float() const;
 
-        float getFloat();
-        double getDouble();
-        int getInteger();
-        string getString();
+        bool isFloat() const;
+        bool isDouble() const ;
+        bool isInteger() const;
+        bool isString() const;
+
+        float getFloat() const;
+        double getDouble() const;
+        int getInteger() const;
+        string getString() const;
 
     private:
         string  sValue;
@@ -47,5 +54,6 @@ class Value {
         int     type = 0;
 };
 
+void to_json(nlohmann::json& j, const Value& p);
 
 #endif //INTEGRATION_VALUE_H

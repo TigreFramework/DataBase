@@ -7,12 +7,17 @@
 
 #include <string>
 #include <vector>
+#include <TigreFramework/Core/Kernel/Application/Configurable.h>
 #include "Value.h"
 #include "Line.h"
 
-class Database {
+class Database : public Configurable {
 
     public:
+        /**
+         * That's is only need because we need to tell the Configuration to not Auto Dump IT
+         */
+        Database();
         /**
          * This could be a singleton or a pool
          * that's depends on the Driver Implementation
@@ -20,18 +25,31 @@ class Database {
          */
         static Database* connection();
         /**
+         * This could be a singleton or a pool
+         * that's depends on the Driver Implementation
+         * @return Database Connection
+         */
+        static Database* connection(std::string driver);
+        /**
          * Prepare SQL with parameters and Execute
          * @param sql
          * @param values
          * @return Result of the Query
          */
-        virtual Line execute(std::string sql, std::vector<Value> values) = 0;
+        virtual Lines execute(std::string sql, std::vector<Value> values) = 0;
         /**
          * Just execute the SQL and Return the result
          * @param sql
          * @return Result of the Query
          */
-        virtual Line execute(std::string sql) = 0;
+        virtual Lines execute(std::string sql) = 0;
+
+    protected:
+        static std::string default_connection;
+        static std::map<std::string, std::map<std::string, std::string>> connections;
+
+        static std::map<std::string, std::string> getConfiguration(std::string connection_name = "");
+
 
 };
 

@@ -9,6 +9,8 @@
     #include <string>
     #include "Line.h"
 
-    #define Line map<string, Value>
+    #define Line std::map<std::string, Value>
+
+    #define Lines std::vector<Line>
 
 #endif //TGDATABASE_LINE_H
