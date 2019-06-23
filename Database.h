@@ -14,10 +14,8 @@
 class Database : public Configurable {
 
     public:
-        /**
-         * That's is only need because we need to tell the Configuration to not Auto Dump IT
-         */
-        Database();
+        Database() = default;
+        ~Database() = default;
         /**
          * This could be a singleton or a pool
          * that's depends on the Driver Implementation
