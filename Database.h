@@ -15,7 +15,7 @@ class Database : public Configurable {
 
     public:
         Database() = default;
-        ~Database() = default;
+        virtual ~Database() = default;
         /**
          * This could be a singleton or a pool
          * that's depends on the Driver Implementation

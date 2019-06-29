@@ -1,6 +1,9 @@
 #include "Database.h"
 #include <TigreFramework/Core/Kernel/Application/Configuration.h>
 
+std::map<std::string, std::map<std::string, std::string>> Database::connections;
+std::string Database::default_connection;
+
 Database* Database::connection() {
     return Database::connection("");
 }
