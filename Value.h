@@ -1,7 +1,3 @@
-//
-// Created by pedro on 01/12/17.
-//
-
 #ifndef INTEGRATION_VALUE_H
 #define INTEGRATION_VALUE_H
 

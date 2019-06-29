@@ -1,7 +1,3 @@
-//
-// Created by pedrosoares on 5/8/18.
-//
-
 #ifndef TGDATABASE_LINE_H
 #define TGDATABASE_LINE_H
 

@@ -1,7 +1,3 @@
-//
-// Created by pedro on 01/12/17.
-//
-
 #include <iostream>
 #include <TigreFramework/Core/Kernel/Exception.h>
 #include <TigreFramework/Types/Math.h>
