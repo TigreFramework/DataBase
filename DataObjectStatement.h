@@ -32,7 +32,7 @@ public:
     /**
      * Dump an SQL prepared command
      */
-    virtual void debugDumpParams() = 0;
+    virtual std::string debugDumpParams() = 0;
     /**
      * Fetch the SQLSTATE associated with the last operation on the statement handle
      */
@@ -70,37 +70,13 @@ public:
      */
     virtual vector<Line> fetchAll() = 0;
     /**
-     * Returns a single column from the next row of a result set
-     */
-    virtual void fetchColumn() = 0;
-    /**
-     * Fetches the next row and returns it as an object
-     */
-    virtual void fetchObject() = 0;
-    /**
-     * Retrieve a statement attribute
-     */
-    virtual void getAttribute() = 0;
-    /**
      * Returns metadata for a column in a result set
      */
     virtual void getColumnMeta() = 0;
     /**
-     * Advances to the next rowset in a multi-rowset statement handle
-     */
-    virtual void nextRowset() = 0;
-    /**
      * Returns the number of rows affected by the last SQL statement
      */
     virtual int rowCount() = 0;
-    /**
-     * Define um atributo na instrução
-     */
-    virtual void setAttribute() = 0;
-    /**
-     * Define o modo de carga de dados para esta instrução
-     */
-    virtual void setFetchMode() = 0;
 };
 
 
