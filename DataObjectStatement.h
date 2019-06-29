@@ -28,7 +28,7 @@ public:
     /**
      * Returns the number of columns in the result set
      */
-    virtual void columnCount() = 0;
+    virtual int columnCount() = 0;
     /**
      * Dump an SQL prepared command
      */
@@ -36,11 +36,11 @@ public:
     /**
      * Fetch the SQLSTATE associated with the last operation on the statement handle
      */
-    virtual void errorCode() = 0;
+    virtual int errorCode() = 0;
     /**
      * Fetch extended error information associated with the last operation on the statement handle
      */
-    virtual void errorInfo() = 0;
+    virtual std::string errorInfo() = 0;
     /**
      * Executes a prepared statement
      */
