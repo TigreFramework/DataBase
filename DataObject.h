@@ -13,7 +13,7 @@ class DataObject {
         /**
          * Creates a PDO instance representing a connection to a database
          */
-        DataObject(string dns, string username, string passwd, map<string, string> options={});
+        DataObject(string dns, string username="", string passwd="", map<string, string> options={});
         virtual ~DataObject();
         //DataObject * Create(string dns, string username, string passwd, map<string, string> options);
         /**
