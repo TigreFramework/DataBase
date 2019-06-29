@@ -10,7 +10,6 @@ set(SOURCE_FILES
         DataObjectStatement.h
         Exceptions/DataObjectException.cpp Exceptions/DataObjectException.h
         DataObjectConfiguration.h
-        Database.cpp Database.h
         Value.cpp Value.h
         Line.h)
 
