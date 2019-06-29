@@ -64,7 +64,7 @@ public:
     /**
      * Fetches the next row from a result set
      */
-    virtual void fetch() = 0;
+    virtual Line fetch() = 0;
     /**
      * Returns an array containing all of the result set rows
      */
@@ -92,7 +92,7 @@ public:
     /**
      * Returns the number of rows affected by the last SQL statement
      */
-    virtual void rowCount() = 0;
+    virtual int rowCount() = 0;
     /**
      * Define um atributo na instrução
      */

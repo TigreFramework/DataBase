@@ -70,8 +70,8 @@ void DataObject::errorInfo() {
 /**
  * Executa uma instrução SQL e retornar o número de linhas afetadas
  */
-void DataObject::exec() {
-    return this->instance->exec();
+int DataObject::exec(std::string sql) {
+    return this->instance->exec(sql);
 }
 /**
  * Recuperar um atributo da conexão com o banco de dados
