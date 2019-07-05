@@ -7,11 +7,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
         DataObject.cpp DataObject.h
-        DataObjectStatement.h
+        DataObjectStatement.cpp DataObjectStatement.h
         Exceptions/DataObjectException.cpp Exceptions/DataObjectException.h
         DataObjectConfiguration.h
         Value.cpp Value.h
-        Line.h)
+        Line.h Param.cpp Param.h)
 
 include_directories(vendor)
 

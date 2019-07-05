@@ -4,6 +4,7 @@
 
 #include "Value.h"
 #include "Line.h"
+#include "Param.h"
 
 class DataObjectStatement {
 
@@ -20,7 +21,8 @@ public:
     /**
      * Binds a value to a parameter
      */
-    virtual void bindValue() = 0;
+    virtual void bindValue(int index, Value value) = 0;
+    virtual void bindValue(std::string name, Value value) = 0;
     /**
      * Closes the cursor, enabling the statement to be executed again
      */
@@ -45,17 +47,12 @@ public:
      * Executes a prepared statement
      */
     /**
-     * Use named field
-     * @param params
-     * @return bool
-     */
-    virtual bool execute(std::map<string, Value> params) = 0;
-    /**
+     * Use named field or
      * Use interrogation as marker
      * @param params
      * @return bool
      */
-    virtual bool execute(std::vector<Value> params) = 0;
+    virtual bool execute(const Param& params) = 0;
     /**
      * No bind Used
      * @return bool
@@ -70,13 +67,10 @@ public:
      */
     virtual vector<Line> fetchAll() = 0;
     /**
-     * Returns metadata for a column in a result set
-     */
-    virtual void getColumnMeta() = 0;
-    /**
      * Returns the number of rows affected by the last SQL statement
      */
     virtual int rowCount() = 0;
+
 };
 
 
