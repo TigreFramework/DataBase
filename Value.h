@@ -21,12 +21,8 @@ class Value {
         Value(double* rhs);
         Value(float* rhs);
 
-        Value& operator=(const string& rhs);
-        Value& operator=(const int& rhs);
-        Value& operator=(const double& rhs);
-        Value& operator=(const float& rhs);
+        Value& operator=(const Value& rhs);
 
-        //explicit operator std::string() const;
         operator int() const;
         operator double() const;
         operator float() const;

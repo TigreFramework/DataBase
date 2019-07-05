@@ -13,7 +13,7 @@ public:
     /**
      * Bind a column to a PHP variable
      */
-    virtual void bindColumn() = 0;
+    virtual void bindColumn(int index, Value value) = 0;
     /**
      * Binds a value to a parameter
      */

@@ -3,15 +3,15 @@
 #include <TigreFramework/Types/Math.h>
 #include "Value.h"
 
-Value::Value(int rhs) : iValue(rhs), type(2) { }
+Value::Value(int rhs) : iValue(rhs), type(2) {}
 
-Value::Value(float rhs) : fValue(rhs), type(3) { }
+Value::Value(float rhs) : fValue(rhs), type(3) {}
 
-Value::Value(double rhs) : dValue(rhs), type(4) { }
+Value::Value(double rhs) : dValue(rhs), type(4) {}
 
-Value::Value(string rhs) : sValue(rhs), type(1) { }
+Value::Value(string rhs) : sValue(rhs), type(1) {}
 
-Value::Value(const char rhs[]) : sValue(rhs), type(1) { }
+Value::Value(const char rhs[]) : sValue(rhs), type(1) {}
 
 
 Value::Value(int* rhs) : vValue(rhs), type(2), isPointer(true) { }
@@ -22,42 +22,36 @@ Value::Value(double* rhs) : vValue(rhs), type(4), isPointer(true) { }
 
 Value::Value(string* rhs) : vValue(rhs), type(1), isPointer(true) { }
 
-Value& Value::operator=(const int &rhs) {
-    this->type   = 2;
-    this->iValue = rhs;
-    return *this;
-}
-
-Value& Value::operator=(const float &rhs) {
-    this->type   = 3;
-    this->fValue = rhs;
-    return *this;
-}
-
-Value& Value::operator=(const double &rhs) {
-    this->type   = 4;
-    this->dValue = rhs;
-    return *this;
-}
-
-Value& Value::operator=(const string &rhs) {
-    this->type   = 1;
-    this->sValue = rhs;
-    return *this;
-}
-
-/*Value::operator std::string() const {
-    if(isString()){
-        return this->sValue;
-    } else if(isInteger()) {
-        return to_string(this->iValue);
-    } else if(isFloat()) {
-        return to_string(this->fValue);
-    } else if(isDouble()) {
-        return to_string(this->dValue);
+Value& Value::operator=(const Value &rhs) {
+    if(this->isPointer && !rhs.isPointer) {
+        this->type = rhs.type;
+        switch (rhs.type) {
+            case 1:
+                (*(string *) this->vValue) = rhs.sValue;
+                break;
+            case 2:
+                (*(int *) this->vValue) = rhs.iValue;
+                break;
+            case 3:
+                (*(float *) this->vValue) = rhs.fValue;
+                break;
+            case 4:
+                (*(double *) this->vValue) = rhs.dValue;
+                break;
+            default:
+                throw "HERE WE GO AGAIN";
+        }
+    } else {
+        this->type = rhs.type;
+        this->sValue = rhs.sValue;
+        this->iValue = rhs.iValue;
+        this->dValue = rhs.dValue;
+        this->fValue = rhs.fValue;
+        this->vValue = rhs.vValue;
+        this->isPointer = rhs.isPointer;
     }
-    throw Exception("Value not found");
-}*/
+    return *this;
+}
 
 Value::operator int() const {
     if(isString()){
