@@ -63,7 +63,7 @@ class DataObject {
         /**
          * Quotes a string for use in a query
          */
-        virtual void quote();
+        virtual std::string quote(const std::string& value);
         /**
          * Rolls back a transaction
          */

@@ -112,8 +112,8 @@ void DataObject::query() {
 /**
  * Quotes a string for use in a query
  */
-void DataObject::quote() {
-    return this->instance->quote();
+std::string DataObject::quote(const std::string& value) {
+    return this->instance->quote(value);
 }
 /**
  * Rolls back a transaction

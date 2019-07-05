@@ -70,6 +70,10 @@ public:
      * Returns the number of rows affected by the last SQL statement
      */
     virtual int rowCount() = 0;
+    /**
+     * Quotes a string for use in a query
+     */
+    virtual std::string quote(const std::string& value) = 0;
 
 };
 
