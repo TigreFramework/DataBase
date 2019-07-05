@@ -5,6 +5,8 @@
 #include <vector>
 #include "Value.h"
 
+class DataObjectStatement;
+
 using namespace std;
 
 class Param {
@@ -30,10 +32,10 @@ class Param {
         void set(map<string, Value>  params);
         void set(vector<Value>  params);
 
-        std::string bind(const std::string& sql) const ;
+        std::string bind(const std::string& sql, DataObjectStatement* statement) const ;
 
     protected:
-        virtual std::string valueToSting(const Value& value) const ;
+        virtual std::string valueToSting(const Value& value, DataObjectStatement* statement) const ;
 
     private:
         map<int, Value>  paramsByIndex;

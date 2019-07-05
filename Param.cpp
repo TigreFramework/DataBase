@@ -1,4 +1,5 @@
 #include <TigreFramework/String/String.h>
+#include "DataObjectStatement.h"
 #include "Param.h"
 
 Param::Param(std::initializer_list<Value>  params) {
@@ -66,18 +67,18 @@ Param& Param::operator=(const map<string, Value> &params) {
     return *this;
 }
 
-std::string Param::bind(const std::string& sql) const {
+std::string Param::bind(const std::string& sql, DataObjectStatement* statement) const {
     Tigre::String sql_1 = sql;
 
     for(auto param : this->paramsByName){
-        sql_1.replace(param.first, this->valueToSting(param.second));
+        sql_1.replace(param.first, this->valueToSting(param.second, statement));
     }
 
     std::string sql_2;
     int j = -1;
     for (char i : sql_1.getValue()) {
         if (i == '?' && this->paramsByIndex.find(++j) != this->paramsByIndex.end()) {
-            sql_2 += this->valueToSting(this->paramsByIndex.at(j));
+            sql_2 += this->valueToSting(this->paramsByIndex.at(j), statement);
         } else {
             sql_2 += std::string(1, i);
         }
@@ -86,12 +87,10 @@ std::string Param::bind(const std::string& sql) const {
     return sql_2;
 }
 
-std::string Param::valueToSting(const Value& value) const {
+std::string Param::valueToSting(const Value& value, DataObjectStatement* statement) const {
     std::string result;
     if (value.isString()) {
-        result += std::string("\"");
-        result += value.getString();
-        result += std::string("\"");
+        result += statement->quote(value.getString());
     } else if (value.isInteger()) {
         result += std::to_string(value.getInteger());
     } else if (value.isFloat()) {
