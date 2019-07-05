@@ -13,6 +13,15 @@ Value::Value(string rhs) : sValue(rhs), type(1) { }
 
 Value::Value(const char rhs[]) : sValue(rhs), type(1) { }
 
+
+Value::Value(int* rhs) : vValue(rhs), type(2), isPointer(true) { }
+
+Value::Value(float* rhs) : vValue(rhs), type(3), isPointer(true) { }
+
+Value::Value(double* rhs) : vValue(rhs), type(4), isPointer(true) { }
+
+Value::Value(string* rhs) : vValue(rhs), type(1), isPointer(true) { }
+
 Value& Value::operator=(const int &rhs) {
     this->type   = 2;
     this->iValue = rhs;
@@ -52,39 +61,39 @@ Value& Value::operator=(const string &rhs) {
 
 Value::operator int() const {
     if(isString()){
-        return Math::toInt(this->sValue);
+        return Math::toInt(this->getString());
     } else if(isInteger()) {
-        return this->iValue;
+        return this->getInteger();
     } else if(isFloat()) {
-        return (int)(this->fValue);
+        return (int)(this->getFloat());
     } else if(isDouble()) {
-        return (int)(this->dValue);
+        return (int)(this->getDouble());
     }
     throw Exception("Value not found, the type is (" + std::to_string(this->type) + ")");
 }
 
 Value::operator float() const {
     if(isString()){
-        return Math::toFloat(this->sValue);
+        return Math::toFloat(this->getString());
     } else if(isInteger()) {
-        return (float)(this->iValue);
+        return (float)(this->getInteger());
     } else if(isFloat()) {
-        return this->fValue;
+        return this->getFloat();
     } else if(isDouble()) {
-        return (float)(this->dValue);
+        return (float)(this->getDouble());
     }
     throw Exception("Value not found, the type is (" + std::to_string(this->type) + ")");
 }
 
 Value::operator double() const {
     if(isString()){
-        return Math::toDouble(this->sValue);
+        return Math::toDouble(this->getString());
     } else if(isInteger()) {
-        return (double)(this->iValue);
+        return (double)(this->getInteger());
     } else if(isFloat()) {
-        return (double)(this->fValue);
+        return (double)(this->getFloat());
     } else if(isDouble()) {
-        return this->dValue;
+        return this->getDouble();
     }
     throw Exception("Value not found, the type is (" + std::to_string(this->type) + ")");
 }
@@ -106,19 +115,19 @@ bool Value::isString() const {
 }
 
 double Value::getDouble() const {
-    return this->dValue;
+    return this->isPointer ? (*(double *) this->vValue) : this->dValue;
 }
 
 float Value::getFloat() const {
-    return this->fValue;
+    return this->isPointer ? (*(float *) this->vValue) : this->fValue;
 }
 
 int Value::getInteger() const {
-    return this->iValue;
+    return this->isPointer ? (*(int *) this->vValue) : this->iValue;
 }
 
 string Value::getString() const {
-    return this->sValue;
+    return this->isPointer ? (*(string *) this->vValue) : this->sValue;
 }
 
 void to_json(nlohmann::json& j, const Value& p) {

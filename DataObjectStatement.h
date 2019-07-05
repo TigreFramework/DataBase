@@ -15,10 +15,6 @@ public:
      */
     virtual void bindColumn() = 0;
     /**
-     * Binds a parameter to the specified variable name
-     */
-    virtual void bindParam() = 0;
-    /**
      * Binds a value to a parameter
      */
     virtual void bindValue(int index, Value value) = 0;

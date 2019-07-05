@@ -16,6 +16,11 @@ class Value {
         Value(double rhs);
         Value(float rhs);
 
+        Value(string* rhs);
+        Value(int* rhs);
+        Value(double* rhs);
+        Value(float* rhs);
+
         Value& operator=(const string& rhs);
         Value& operator=(const int& rhs);
         Value& operator=(const double& rhs);
@@ -41,6 +46,7 @@ class Value {
         int     iValue;
         double  dValue;
         float   fValue;
+        void*   vValue;
         /**
          * 1 String
          * 2 Integer
@@ -48,6 +54,7 @@ class Value {
          * 4 Double
          */
         int     type = 0;
+        bool    isPointer = false;
 };
 
 void to_json(nlohmann::json& j, const Value& p);
