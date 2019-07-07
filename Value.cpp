@@ -23,7 +23,7 @@ Value::Value(double* rhs) : vValue(rhs), type(4), isPointer(true) { }
 Value::Value(string* rhs) : vValue(rhs), type(1), isPointer(true) { }
 
 Value& Value::operator=(const Value &rhs) {
-    if(this->isPointer && !rhs.isPointer) {
+    if(this->isPointer && !rhs.isPointer && rhs.type == this->type) {
         this->type = rhs.type;
         switch (rhs.type) {
             case 1:
